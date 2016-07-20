@@ -27,8 +27,9 @@
  'license': 'AGPL-3',
  'depends': [
      'connector',
-     'sale_payment_method_automatic_workflow',
-     'sale_exceptions',
+     #'sale_payment_method_automatic_workflow',
+     'sale_automatic_workflow',
+     'sale_exception',
      'delivery',
      'connector_base_product',
  ],
@@ -41,7 +42,7 @@
      'ecommerce_data.xml',
      'stock_view.xml',
      'payment_method_view.xml',
-     'account_view.xml',
+     #'account_view.xml',
  ],
- 'installable': False,
+ 'installable': True,
  }
