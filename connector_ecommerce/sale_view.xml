@@ -7,12 +7,10 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-                <page string="Other Information" position="after">
-                    <!-- change the invisible attribute to 0 when used
-                         in submodules -->
+                <xpath expr="//notebook//page[last()]" position="after">
                     <page name="connector" string="Connectors" invisible="1">
                     </page>
-                </page>
+                </xpath>
             </field>
         </record>
 
@@ -25,7 +23,7 @@
                     <field name="canceled_in_backend"/>
                     <field name="cancellation_resolved" invisible="1"/>
                 </field>
-                <button name="invoice_recreate" position="before">
+                <button name="action_quotation_send" position="before">
                     <field name="parent_id" invisible="1"/>
                     <button name="action_view_parent"
                         string="View Parent Sales Order"
@@ -33,7 +31,7 @@
                         attrs="{'invisible': [('parent_id', '=', False)]}"
                         groups="base.group_user"/>
                 </button>
-                <button name="invoice_cancel" position="after">
+                <button name="action_cancel" position="after">
                     <button name="%(action_sale_ignore_cancel)d"
                         type="action"
                         attrs="{'invisible': ['|', '|', ('canceled_in_backend', '=', False), ('cancellation_resolved', '=', True), ('state', '==', 'cancel')]}"
