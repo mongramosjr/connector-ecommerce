@@ -27,20 +27,26 @@ from .event import on_invoice_paid, on_invoice_validated
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    #TODO: fire event on sale order only and find the specified sale order
+    # type = out_invoice
     @api.multi
     def confirm_paid(self):
         res = super(AccountInvoice, self).confirm_paid()
         session = ConnectorSession(self.env.cr, self.env.uid,
                                    context=self.env.context)
         for record_id in self.ids:
-            on_invoice_paid.fire(session, self._name, record_id)
+            if record_id.type='out_invoice':
+                on_invoice_paid.fire(session, self._name, record_id)
         return res
 
+    #TODO: fire event on sale order only and find the specified sale order
+    # type = out_invoice
     @api.multi
     def invoice_validate(self):
         res = super(AccountInvoice, self).invoice_validate()
         session = ConnectorSession(self.env.cr, self.env.uid,
                                    context=self.env.context)
         for record_id in self.ids:
-            on_invoice_validated.fire(session, self._name, record_id)
+            if record_id.type='out_invoice':
+                on_invoice_validated.fire(session, self._name, record_id)
         return res
