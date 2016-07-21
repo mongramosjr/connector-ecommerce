@@ -35,7 +35,7 @@ class AccountInvoice(models.Model):
         session = ConnectorSession(self.env.cr, self.env.uid,
                                    context=self.env.context)
         for record_id in self.ids:
-            if record_id.type='out_invoice':
+            if record_id.type=='out_invoice':
                 on_invoice_paid.fire(session, self._name, record_id)
         return res
 
@@ -47,6 +47,6 @@ class AccountInvoice(models.Model):
         session = ConnectorSession(self.env.cr, self.env.uid,
                                    context=self.env.context)
         for record_id in self.ids:
-            if record_id.type='out_invoice':
+            if record_id.type=='out_invoice':
                 on_invoice_validated.fire(session, self._name, record_id)
         return res
