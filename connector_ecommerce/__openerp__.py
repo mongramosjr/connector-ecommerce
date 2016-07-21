@@ -41,7 +41,7 @@
      'invoice_view.xml',
      'ecommerce_data.xml',
      'stock_view.xml',
-     'payment_method_view.xml',
+     #'payment_method_view.xml',
      #'account_view.xml',
  ],
  'installable': True,
