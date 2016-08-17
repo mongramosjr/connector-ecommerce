@@ -36,7 +36,7 @@ class AccountInvoice(models.Model):
                                    context=self.env.context)
         for record_id in self:
             if record_id.type=='out_invoice':
-                on_invoice_paid.fire(session, self._name, record_id)
+                on_invoice_paid.fire(session, self._name, record_id.id)
         return res
 
     #TODO: fire event on sale order only and find the specified sale order
@@ -48,5 +48,5 @@ class AccountInvoice(models.Model):
                                    context=self.env.context)
         for record_id in self:
             if record_id.type=='out_invoice':
-                on_invoice_validated.fire(session, self._name, record_id)
+                on_invoice_validated.fire(session, self._name, record_id.id)
         return res
