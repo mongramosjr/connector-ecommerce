@@ -50,6 +50,8 @@ class ProductPricelistItem(models.Model):
         
     @api.multi
     def _price_changed(self, vals):
+	session = ConnectorSession(self.env.cr, self.env.uid,
+                                   context=self.env.context)
                         
         for item_id in self.ids:
             
